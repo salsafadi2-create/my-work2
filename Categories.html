@@ -66,20 +66,21 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <ul class="sub-category-list">
-                        <li class="active">تصميم مطاعم</li>
-                        <li>تصاميم ملابس</li>
-                        <li>تصاميم عطور</li>
-                        <li>تصاميم التجميل</li>
-                        <li> تصماميم عملات رقمية </li>
-                        <li>تصاميم مجوهرات</li>
-                        <li>تصاميم الكترونيات</li>
-                        <li>تصاميم عقارات</li>
-                        <li>تصاميم سيارات</li>
-                        <li>تصاميم ساعات</li>
-                        <li>تصاميم الاثاث</li>
-                        <li>تصاميم العروض</li>
-                        <li>تصاميم اليوم الوطني</li>
-                        <li>تصاميم المناسبات والاعياد</li>
+                        <li class="active" onclick="filterWorks('restaurants')">تصميم مطاعم</li>
+                        <li onclick="filterWorks('clothes')">تصاميم ملابس</li>
+                        <li onclick="filterWorks('perfumes')">تصاميم عطور</li>
+                        <li onclick="filterWorks('beauty')">تصاميم التجميل</li>
+                        <li onclick="filterWorks('crypto')"> تصاميم العملات رقمية </li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم مجوهرات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم الكترونيات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم عقارات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم سيارات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم ساعات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم الاثاث</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم العروض </li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم اليوم الوطني </li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم المناسبات و الأعياد </li>
+
 
                     </ul>
                 </div>
@@ -89,46 +90,109 @@
                         <span>تصميم الهوية البصرية</span>
                         <i class="fas fa-chevron-left"></i>
                     </div>
-                    <div class="category-main">
-                        <span>تصميمux-ui</span>
+                     <div class="category-main">
+                        <span>UX / UI تصميم</span>
                         <i class="fas fa-chevron-left"></i>
                     </div>
-                    <div class="category-main">
-                        <span>تصميم الطباعة والنشر</span>
+                     <div class="category-main">
+                        <span> تصميم الطباعة و النشر</span>
                         <i class="fas fa-chevron-left"></i>
                     </div>
                 </div>
             </aside>
 
-             <main class="gallery-main">
+            <main class="gallery-main">
                 <div class="gallery-grid">
-                    <div class="work-card"><img src="https://picsum.photos/400/400?random=1" alt="Work"></div>
-                    <div class="work-card"><img src="https://picsum.photos/400/400?random=2" alt="Work"></div>
-                    <div class="work-card"><img src="https://picsum.photos/400/400?random=3" alt="Work"></div>
-                    <div class="work-card"><img src="https://picsum.photos/400/400?random=4" alt="Work"></div>
-                    <div class="work-card"><img src="https://picsum.photos/400/400?random=5" alt="Work"></div>
-                    <div class="work-card"><img src="https://picsum.photos/400/400?random=6" alt="Work"></div>
-                    <div class="work-card"><img src="https://picsum.photos/400/400?random=7" alt="Work"></div>
-                    <div class="work-card"><img src="https://picsum.photos/400/400?random=8" alt="Work"></div>
-                    <div class="work-card"><img src="https://picsum.photos/400/400?random=9" alt="Work"></div>
-                </div>
-
-                <div class="load-more-wrapper">
-                    <button class="btn-ghaya">عرض المزيد</button>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=1" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=2" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=3" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=4" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=5" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=6" class="clickable-img"
+                            alt="Work"></div>
                 </div>
             </main>
 
+            <div id="imageModal" class="modal-overlay">
+                <div class="modal-box">
+
+                    <div class="modal-top-bar">
+                        <div class="breadcrumb-text">
+                            التصميم / تصميم سوشيال ميديا / <span id="dynamicCategory">مطاعم</span>
+                        </div>
+                        <span class="close-icon" onclick="closeMyModal()">&times;</span>
+                    </div>
+
+                    <div class="modal-photo-area">
+                        <img id="modalFullImage" src="" alt="Work Preview">
+                    </div>
+
+                </div>
+            </div>
+
+            <script>
+                // هذه الوظيفة ستعمل فور الضغط على الصورة
+                document.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('clickable-img')) {
+                        const modal = document.getElementById('imageModal');
+                        const modalImg = document.getElementById('modalFullImage');
+
+                        modal.style.display = 'flex'; // إظهار النافذة
+                        modalImg.src = e.target.src;   // نقل الصورة
+                        console.log("تم فتح الصورة بنجاح!");
+                    }
+                });
+
+                // وظيفة الإغلاق
+                function closeMyModal() {
+                    document.getElementById('imageModal').style.display = 'none';
+                }
+
+                // الإغلاق عند الضغط خارج الصندوق
+                window.onclick = function (event) {
+                    const modal = document.getElementById('imageModal');
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                }
+            </script>
+
         </div>
     </section>
+
+    <div id="imageModal" class="modal-overlay">
+        <div class="modal-container">
+            <span class="close-modal">&times;</span>
+
+            <div class="modal-flex-content">
+                <div class="modal-image-side">
+                    <img id="modalFullImage" src="" alt="Full Preview">
+                </div>
+
+                <div class="modal-info-side">
+                    <h2 id="modalWorkTitle">تفاصيل التصميم</h2>
+                    <p>هذا التصميم تم تنفيذه باحترافية ليتناسب مع هوية العميل، مع مراعاة أدق التفاصيل البصرية.</p>
+                    <div class="modal-actions">
+                        <button class="btn-ghaya">طلب خدمة مماثلة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="main-footer">
         <div class="footer-container">
-            <p>© 2025 GhayaTech. All rights reserved.</p>
+            <p>© 2026 GhayaTech. All rights reserved.</p>
         </div>
     </footer>
 
 
 
-   
+
     <script src="script.js"></script>
     <!-- <div id="imageModal" class="modal-overlay">
     <div class="modal-container">

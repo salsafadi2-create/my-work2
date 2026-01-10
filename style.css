@@ -198,82 +198,233 @@ body {
     filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.3));
 }
 
-/* تنسيق السيكشن بالكامل */
-/* سيكشن الخدمات الرئيسي */
-.services {
+
+/* سيكشن الخدمات  */
+
+
+.services-section {
     padding: 80px 0;
-    background-color: #fcfcfc; /* خلفية فاتحة جدًا للتمييز */
     text-align: center;
+    background-color: #fcfcfc;
+    direction: rtl; /* لضمان الترتيب العربي */
 }
 
-.services h2 {
-    color: #1a4d43;
-    font-size: 26px;
+.section-title {
+    color: #1a4d43; 
     margin-bottom: 50px;
-    font-family: 'Tajawal', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-/* شبكة البطاقات */
-.services-grid {
+.services-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 أعمدة كما في فيجما */
-    gap: 25px;
-    max-width: 1100px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* تصميم البطاقة */
 .service-card {
     background: #ffffff;
-    border: 1px solid #edf2f1; /* إطار خفيف جدًا متناسق مع الأخضر */
-    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    border-radius: 24px; /* مطابقة لحواف فيجما */
     padding: 40px 20px;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    color: #1a4d43;
-    font-weight: 600;
-    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    position: relative;
+    overflow: hidden;
 }
 
-/* تأثير الظل عند التمرير كما في فيجما */
+/* --- الهوفر الخاص بالبطاقة (الظل والارتفاع) --- */
 .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(26, 77, 67, 0.08); /* ظل ناعم بلون الهوية */
-    /* border-color: #1a4d43; */
+    transform: translateY(-10px);
+    border-color: #1a4d43;
+    box-shadow: 0 20px 40px rgba(26, 77, 67, 0.1);
 }
 
-/* تنسيق الأيقونات وإخفاء الخلفية السوداء */
-.service-card img {
-    width: 60px;
-    height: 60px;
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
     margin-bottom: 20px;
-    object-fit: contain;
-
-    /* الخطوات لتحويل الصورة من خلفية سوداء إلى أيقونة خضراء بخلفية بيضاء */
-    filter: invert(1)             /* عكس الألوان لجعل الخلفية بيضاء */
-            hue-rotate(180deg)    /* إعادة اللون الأخضر للأيقونة */
-            brightness(0.9)       /* تقليل السطوع لجعل الأخضر غامقاً (Dark Green) */
-            contrast(2);        /* زيادة التباين لتنظيف أي شوائب متبقية */
-
-    /* التأكيد على اختفاء أي ظلال سوداء */
-    mix-blend-mode: multiply; 
-}
-
-.service-card {
-    background-color: #ffffff !important; /* التأكد أن خلفية البطاقة بيضاء ناصعة */
-    border: 1px solid #f0f0f0;
-    border-radius: 12px;
-    padding: 35px;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
     transition: 0.3s;
 }
+
+.service-card .icon-wrapper img {
+    width: 65px; /* تكبير بسيط للأيقونة */
+    height: 65px;
+    object-fit: contain;
+    /* إلغاء الـ grayscale واستبداله بفلاتر العكس مباشرة */
+    filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.5);
+    transition: all 0.4s ease;
+}
+
+/* يحل مشكلة اللون الأسود ويجعل الأيقونة تلمع بلون غايتك */
+.service-card:hover .icon-wrapper img {
+    filter: invert(1) hue-rotate(180deg) brightness(0.4) contrast(2); 
+    transform: scale(1.1); /* نبض بسيط للأيقونة */
+}
+
+.service-card h3 {
+    font-size: 19px;
+    color: #333;
+    margin-top: 10px;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.service-card:hover h3 {
+    color: #1a4d43;
+    font-weight: bold;
+}
+
+/* لمسة جمالية: خط صغير يظهر تحت النص عند الهوفر */
+.service-card h3::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #1a4d43;
+    transition: width 0.3s;
+    margin: 5px auto 0;
+}
+
+.service-card:hover h3::after {
+    width: 100%;
+}
+
+
+
+/* 1. الطبقة الخلفية الشفافة */
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 77, 67, 0.85); /* لون غايتك الرئيسي بوزن شفاف */
+    backdrop-filter: blur(12px); /* تأثير زجاجي فخم */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 2. الصندوق الأبيض الرئيسي */
+.modal-container {
+    background: #ffffff;
+    width: 90%;
+    max-width: 1000px; /* عرض متوازن */
+    border-radius: 30px; /* حواف دائرية ناعمة كما في فيجما */
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 3. ترتيب المحتوى (صورة يسار - نص يمين) */
+.modal-flex-content {
+    display: flex;
+    flex-direction: row-reverse; /* ترتيب عربي */
+    min-height: 500px;
+}
+
+/* 4. جانب الصورة */
+.modal-image-side {
+    flex: 1.2;
+    background: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #eee;
+}
+
+.modal-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* لضمان ملء المساحة بجمالية */
+}
+
+/* 5. جانب النصوص */
+.modal-info-side {
+    flex: 0.8;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    direction: rtl;
+}
+
+.modal-info-side h2 {
+    color: #1a4d43;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.modal-info-side p {
+    color: #666;
+    line-height: 1.8;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+/* 6. زر "طلب خدمة مماثلة" */
+.btn-ghaya-modal {
+    background-color: #1a4d43;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: fit-content;
+}
+
+.btn-ghaya-modal:hover {
+    background-color: #143a32;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(26, 77, 67, 0.2);
+}
+
+/* 7. زر الإغلاق (X) */
+.close-modal {
+    position: absolute;
+    top: 25px;
+    left: 25px; /* يوضع يساراً في التصميم العربي */
+    font-size: 32px;
+    color: #1a4d43;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s;
+}
+
+.close-modal:hover {
+    transform: rotate(90deg) scale(1.2);
+    color: #ff4d4d;
+}
+
+
+
+
+
 
 /* التجاوب مع الجوال */
 @media (max-width: 992px) {
@@ -288,14 +439,7 @@ body {
     }
 }
 
-/* تنسيق سيكشن تصفح خدمات التصميم */
-/* الإعدادات العامة للسيكشن */
-.services-directory {
-    width: 100%;
-    padding: 80px 0;
-    background-color: #fff;
-    direction: rtl;
-}
+
 
 .directory-container {
     max-width: 1200px;
@@ -619,99 +763,160 @@ opacity: 0.8;
     transform: translateY(-1px);
 }
 
-/* الحاوية الرئيسية */
+/* 1. إعدادات الحاوية الكبرى لضمان عدم وجود فراغات عشوائية */
 .portfolio-layout {
+    width: 100%;
     padding: 60px 0;
-    direction: rtl; /* لضمان اليمين للياسر */
     background-color: #ffffff;
+    direction: rtl; /* الترتيب العربي */
 }
 
 .container-fluid {
-    max-width: 1400px;
+    max-width: 1728px; /* العرض المطابق لفيجما */
     margin: 0 auto;
-    padding: 0 40px;
-    display: flex; /* ترتيب الأقسام بجانب المعرض */
-    gap: 60px; /* مسافة واضحة بينهما */
+    padding: 0 50px;
+    display: flex;
+    gap: 40px; /* المسافة بين القائمة والمعرض */
+    align-items: flex-start;
 }
 
-/* القائمة الجانبية - اليمين */
+/* 2. تنسيق القائمة الجانبية (اليمين) */
 .sidebar-categories {
-    flex: 0 0 280px; /* عرض ثابت للقائمة */
+    flex: 0 0 300px; /* عرض ثابت لمنع التمدد العشوائي */
+    position: sticky;
+    top: 110px; /* تبقى ثابتة عند التمرير */
 }
 
 .sidebar-title {
     color: #1a4d43;
     font-size: 22px;
     font-weight: 700;
-    margin-bottom: 30px;
-    border-right: 4px solid #1a4d43; /* الخط الأخضر الجانبي */
+    margin-bottom: 25px;
+    border-right: 4px solid #1a4d43;
     padding-right: 15px;
-}
-
-.category-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #1a4d43;
-    font-weight: 700;
-    padding: 10px 0;
-    cursor: pointer;
 }
 
 .sub-category-list {
     list-style: none;
-    padding-right: 20px;
+    padding-right: 15px;
     border-right: 1px solid #eee;
-    margin-bottom: 20px;
 }
 
 .sub-category-list li {
-    padding: 8px 0;
-    color: #777;
-    font-size: 15px;
+    padding: 10px 0;
+    color: #888;
+    font-size: 16px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
-.sub-category-list li:hover, .sub-category-list li.active {
+.sub-category-list li:hover, 
+.sub-category-list li.active {
     color: #1a4d43;
     font-weight: 700;
 }
 
-/* معرض الصور - اليسار */
+/* 3. تنسيق معرض الصور (اليسار) */
 .gallery-main {
-    flex: 1; /* يأخذ باقي مساحة الصفحة */
+    flex: 1; /* يأخذ كل المساحة المتبقية */
 }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
-    gap: 25px;
+    grid-template-columns: repeat(3, 1fr); /* 3 أعمدة متساوية */
+    gap: 20px; /* الفراغ بين الصور كما في فيجما */
 }
 
 .work-card {
-    aspect-ratio: 1 / 1; /* مربع مثالي */
-    background-color: #f9f9f9;
-    border-radius: 15px;
+    aspect-ratio: 1 / 1; /* يضمن أن تظل الصور مربعة دائماً */
+    border-radius: 24px; /* حواف منحنية كبيرة كما في التصميم */
     overflow: hidden;
+    background-color: #f9f9f9;
     border: 1px solid #eee;
-    transition: transform 0.3s ease;
+    cursor: pointer;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .work-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* لملء المربع بالصورة دون تشويه */
+    object-fit: cover; /* يملأ المربع بالصورة بدون تمطيط */
+    transition: transform 0.5s ease;
 }
 
-.work-card:hover {
-    transform: translateY(-8px);
+.work-card:hover img {
+    transform: scale(1.08); /* زووم احترافي عند التمرير */
 }
 
-/* زر عرض المزيد */
-.load-more-wrapper {
-    text-align: center;
-    margin-top: 50px;
+/* 4. تنسيق النافذة المنبثقة (Modal) لمنع التداخل */
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-container {
+    background: #fff;
+    width: 90%;
+    max-width: 1100px;
+    border-radius: 30px;
+    display: flex;
+    overflow: hidden;
+    animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-flex-content {
+    display: flex;
+    flex-direction: row-reverse; /* الصورة يسار والنص يمين في التنسيق العربي */
+    width: 100%;
+}
+
+.modal-image-side {
+    flex: 1.5;
+    background: #f0f0f0;
+}
+
+.modal-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.modal-info-side {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+}
+
+
+.close-modal {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    font-size: 35px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.work-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
 }
 
 .btn-ghaya {
