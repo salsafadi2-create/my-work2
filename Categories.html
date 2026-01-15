@@ -9,58 +9,97 @@
 </head>
 
 <body>
-    <header class="top-bar">
+    <header class="main-header">
         <div class="container-header">
-            <div class="menu-icon" id="menuBtn">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="right-section">
+                <div class="hamburger-menu" id="hamburgerBtn">
+                    <span></span><span></span><span></span>
+                </div>
             </div>
 
-            <!-- <div class="search-box">
-                <div class="search-wrapper">
-                    <input type="text" id="searchInput" placeholder="ابحث عن تصميم...">
-                    <i class="search-icon">🔍</i>
+            <div class="left-section">
+                <div class="logo">
+                    <img src="./imag/2.jpg" alt="Ghayatech Logo">
                 </div>
-            </div> -->
-
-            <div class="logo-section">
-                <img src="./imag/2.jpg" alt="Ghayatech Logo" class="header-logo">
             </div>
         </div>
+
+        <div class="side-nav" id="sideNav">
+            <div class="close-menu" id="closeBtn">&times;</div>
+            <ul class="nav-links">
+                <li><a href="#">الرئيسية</a></li>
+                <li class="has-submenu">
+                    <a href="#">خدماتنا <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#">تصميم جرافيك</a></li>
+                        <li><a href="#">برمجة مواقع</a></li>
+                        <li><a href="#">تسويق إلكتروني</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">معرض الأعمال</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+        </div>
+        <div class="overlay" id="navOverlay"></div>
     </header>
-    <section class="category-header">
 
-        <div class="header-container">
-
-            <div class="header-right-side">
-                <nav class="breadcrumb">الرئيسية / التصميم / تصاميم سوشيال ميديا</nav>
-                <h1 class="main-category-title">تصميم منشورات سوشيال ميديا</h1>
-                <p>حول افكارك الى تصاميم سوشيال ميديا مميزة</p>
+    <section class="category-header-section">
+        <div class="header-main-content">
+            <div class="title-area">
+                <h1>تصميم منشورات سوشيال ميديا</h1>
+                <p>حول أفكارك إلى تصاميم سوشيال ميديا مميزة</p>
             </div>
 
-            <div class="header-center">
-                <div class="search-bar-inner">
-                    <input type="text" placeholder="بحث">
-                    <i class="fas fa-search"></i>
+            <div class="center-section">
+                <div class="search-wrapper">
+                    <input type="text" placeholder="ابحث عن تصميم...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
                 </div>
             </div>
 
-            <div class="header-left-side">
-                <div class="dropdown-filter">
-                    <span>خدمات مميزة</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
+            <div class="custom-select-wrapper" id="filterBtn" onclick="toggleFilterPop()">
+                <span>خدمات مميزة</span>
+                <i class="fas fa-chevron-down"></i>
             </div>
 
+            <div id="filterOverlay" class="filter-pop-overlay">
+                <div class="filter-pop-card">
+                    <div class="filter-pop-header">
+                        <h3>تصفية النتائج</h3>
+                        <button class="close-pop-btn" onclick="toggleFilterPop()">&times;</button>
+                    </div>
+
+                    <div class="filter-pop-body">
+                        <div class="filter-group">
+                            <label>ترتيب حسب:</label>
+                            <select id="sortBy">
+                                <option value="latest">الأحدث</option>
+                                <option value="popular">الأكثر طلباً</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>نطاق السعر:</label>
+                            <input type="range" min="10" max="1000" id="priceRange">
+                            <div class="range-values">10$ - 1000$</div>
+                        </div>
+
+                        <button class="apply-btn" onclick="applyFilters()">تطبيق التصفية</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </section>
     <section class="portfolio-layout">
         <div class="container-fluid">
-
             <aside class="sidebar-categories">
                 <h3 class="sidebar-title">الأقسام</h3>
                 <div class="category-group">
+                    <div class="catiegory-head">
+                        <span>التصاميم</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                     <div class="category-main active">
                         <span>تصميم سوشيال ميديا</span>
                         <i class="fas fa-chevron-down"></i>
@@ -90,11 +129,11 @@
                         <span>تصميم الهوية البصرية</span>
                         <i class="fas fa-chevron-left"></i>
                     </div>
-                     <div class="category-main">
+                    <div class="category-main">
                         <span>UX / UI تصميم</span>
                         <i class="fas fa-chevron-left"></i>
                     </div>
-                     <div class="category-main">
+                    <div class="category-main">
                         <span> تصميم الطباعة و النشر</span>
                         <i class="fas fa-chevron-left"></i>
                     </div>
@@ -115,6 +154,12 @@
                             alt="Work"></div>
                     <div class="work-card"><img src="https://picsum.photos/400/400?random=6" class="clickable-img"
                             alt="Work"></div>
+                </div>
+                <div class="load-more-container">
+                    <button class="btn-load-more">
+                        <span>مشاهدة المزيد</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
                 </div>
             </main>
 
@@ -193,24 +238,9 @@
 
 
 
-    <script src="script.js"></script>
-    <!-- <div id="imageModal" class="modal-overlay">
-    <div class="modal-container">
-        <span class="close-btn">&times;</span>
-        
-        <div class="modal-content-wrapper">
-            <div class="modal-image-box">
-                <img id="modalImg" src="" alt="Preview">
-            </div>
-            
-            <div class="modal-info-box">
-                <h2 id="modalTitle">تصميم منشورات سوشيال ميديا</h2>
-                <p>قسم: تصميم مطاعم</p>
-                <button class="btn-load-more">طلب خدمة مماثلة</button>
-            </div>
-        </div>
-    </div>
-</div> -->
+    <script src="./app.js"></script>
+
+
 </body>
 
 </html>

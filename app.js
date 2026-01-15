@@ -1,4 +1,109 @@
-  
+    // تنسيق الهيدر
+
+    const hBtn = document.getElementById('hamburgerBtn');
+    const sNav = document.getElementById('sideNav');
+    const overlay = document.getElementById('navOverlay');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // فتح القائمة
+    hBtn.onclick = () => {
+        sNav.classList.add('open');
+        overlay.classList.add('show');
+    };
+
+    // إغلاق القائمة
+    const closeMenu = () => {
+        sNav.classList.remove('open');
+        overlay.classList.remove('show');
+    };
+    closeBtn.onclick = closeMenu;
+    overlay.onclick = closeMenu;
+
+    // تشغيل التفرعات داخل المنيو
+    document.querySelectorAll('.has-submenu').forEach(item => {
+        item.onclick = (e) => {
+            item.classList.toggle('active');
+        };
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+    const burger = document.getElementById('hamburgerBtn');
+    const popNav = document.getElementById('navPopOverlay');
+
+    if (burger && popNav) { // التأكد من وجود العناصر في الصفحة الحالية
+        burger.onclick = function() {
+            popNav.classList.toggle('active');
+        };
+    }
+});
+    
+    
+// وظيفة فتح وإغلاق بوب-آب الفلترة
+function toggleFilterPop() {
+    const overlay = document.getElementById('filterOverlay');
+    if (overlay) {
+        // تبديل العرض بين flex و none
+        const isVisible = window.getComputedStyle(overlay).display === 'flex';
+        overlay.style.display = isVisible ? 'none' : 'flex';
+    }
+}
+
+// وظيفة تطبيق الفلاتر
+function applyFilters() {
+    // هنا تضع منطق الفلترة الخاص بمنتجاتك
+    console.log("جاري تطبيق الفلاتر...");
+    toggleFilterPop(); // إغلاق النافذة بعد التطبيق
+}
+
+// إغلاق النافذة عند الضغط خارج البطاقة البيضاء
+window.addEventListener('click', function(event) {
+    const overlay = document.getElementById('filterOverlay');
+    if (event.target === overlay) {
+        overlay.style.display = 'none';
+    }
+});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    const menuBtn = document.getElementById('menuBtn');
+    const sideDropdown = document.getElementById('sideDropdown');
+
+    menuBtn.onclick = function() {
+        sideDropdown.classList.toggle('show-menu');
+    }
+
+    // إغلاق المنيو إذا ضغطت في أي مكان بره
+    window.onclick = function(event) {
+        if (!event.target.closest('#menuBtn')) {
+            sideDropdown.classList.remove('show-menu');
+        }
+    }
+
+ 
+ 
+ function toggleGhayaMenu() {
+    const menu = document.getElementById('dropdownFloating');
+    menu.classList.toggle('is-open');
+}
+
+function toggleSubItem(event, element) {
+    event.stopPropagation(); // يمنع إغلاق القائمة عند الضغط على العناصر
+    const parent = element.parentElement;
+    parent.classList.toggle('active-sub');
+}
+
+// إغلاق عند الضغط خارج المنيو
+window.onclick = function(event) {
+    if (!event.target.closest('.menu-side')) {
+        document.getElementById('dropdownFloating').classList.remove('is-open');
+    }
+} 
   
   
   // فتح وإغلاق القائمة الرئيسية
@@ -32,7 +137,20 @@ window.addEventListener('click', function(e) {
 
 
 
+function toggleFinalFilter(e) {
+    e.stopPropagation();
+    var menu = document.getElementById('servicesMenu');
+    // إذا ضغطنا داخل المنيو لا نغلقه
+    if (e.target.closest('.filter-dropdown-panel')) return;
+    
+    menu.classList.toggle('active');
+}
 
+// إغلاق عند الضغط في الخارج
+document.addEventListener('click', function() {
+    var menu = document.getElementById('servicesMenu');
+    if (menu) menu.classList.remove('active');
+});
 
 
 
@@ -138,3 +256,5 @@ window.addEventListener('click', function(e) {
         observer.observe(card);
     });
 });
+
+

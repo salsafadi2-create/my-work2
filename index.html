@@ -6,31 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معرض تصاميم غايتك</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
 
-    <header class="top-bar">
-        <div class="container-header">
-            <div class="menu-icon" id="menuBtn" href="#">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <div class="search-box">
-                <div class="search-wrapper">
-                    <input type="text" id="searchInput" placeholder="ابحث عن تصميم...">
-                    <i class="search-icon">🔍</i>
-                </div>
-            </div>
-
-            <div class="logo-section">
-                <img src="./imag/2.jpg" alt="Ghayatech Logo" class="header-logo">
+    <header class="main-header">
+    <div class="container-header">
+        <div class="right-section">
+            <div class="hamburger-menu" id="hamburgerBtn">
+                <span></span><span></span><span></span>
             </div>
         </div>
-    </header>
-    
+
+        <div class="center-section">
+            <div class="search-wrapper">
+                <input type="text" placeholder="ابحث عن تصميم...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <div class="left-section">
+            <div class="logo">
+                <img src="./imag/2.jpg" alt="Ghayatech Logo">
+            </div>
+        </div>
+    </div>
+
+    <div class="side-nav" id="sideNav">
+        <div class="close-menu" id="closeBtn">&times;</div>
+        <ul class="nav-links">
+            <li><a href="#">الرئيسية</a></li>
+            <li class="has-submenu">
+                <a href="#">خدماتنا <i class="fas fa-chevron-down"></i></a>
+                <ul class="submenu">
+                    <li><a href="#">تصميم جرافيك</a></li>
+                    <li><a href="#">برمجة مواقع</a></li>
+                    <li><a href="#">تسويق إلكتروني</a></li>
+                </ul>
+            </li>
+            <li><a href="#">معرض الأعمال</a></li>
+            <li><a href="#">اتصل بنا</a></li>
+        </ul>
+    </div>
+    <div class="overlay" id="navOverlay"></div>
+</header>
+
+
+
 
     <section class="hero-banner">
         <div class="hero-content">
@@ -39,97 +63,97 @@
             </div>
         </div>
     </section>
-   <section class="services-section">
-    <h2 class="section-title">خدمات التصميم الإبداعي</h2>
-    
-    <div class="services-container">
-        <div class="service-card">
-            <div class="icon-wrapper">
-                <img src="./imag/a1.jpg" alt="UI/UX Design">
-            </div>
-            <h3>UI/UX Design</h3>
-        </div>
+    <section class="services-section">
+        <h2 class="section-title">خدمات التصميم الإبداعي</h2>
 
-        <div class="service-card">
-            <div class="icon-wrapper">
-                <img src="./imag/a2.jpg" alt="Social Media Design">
-            </div>
-            <h3>تصميم سوشيال ميديا</h3>
-        </div>
-
-        <div class="service-card">
-            <div class="icon-wrapper">
-                <img src="./imag/a3.jpg" alt="Visual Identity">
-            </div>
-            <h3>تصميم الهوية البصرية</h3>
-        </div>
-
-        <div class="service-card">
-            <div class="icon-wrapper">
-                <img src="./imag/a4.jpg" alt="Printing Design">
-            </div>
-            <h3>تصميم للطباعة والنشر</h3>
-        </div>
-    </div>
-</section>
-  <section id="services-directory" class="services-directory">
-    <div class="directory-container">
-        <h2 class="directory-title">تصفح خدمات تصميم</h2>
-        
-        <div class="directory-grid">
-            <div class="directory-column">
-                <h3>تصميم سوشيال ميديا</h3>
-                <ul class="double-col">
-                    <li>مطاعم</li>
-                    <li>ملابس</li>
-                    <li>عطور</li>
-                    <li>تجميل</li>
-                    <li>عملات رقمية</li>
-                    <li>مجوهرات</li>
-                    <li>إلكترونيات</li>
-                    <li>عقارات</li>
-                    <li>سيارات</li>
-                    <li>ساعات</li>
-                    <li>أثاث</li>
-                    <li>عروض</li>
-                    <li class="full-row">اليوم الوطني والمناسبات والأعياد</li>
-                </ul>
-            </div>
-
-            <div class="directory-column">
-                <h3>التصميم للطباعة والنشر</h3>
-                <ul>
-                    <li>لوحات إعلانية</li>
-                    <li>بزنس كارد</li>
-                    <li>تغليفات</li>
-                    <li>بروشور</li>
-                    <li>تصميم منيو</li>
-                    <li>رول أب</li>
-                </ul>
-            </div>
-
-            <div class="directory-column">
+        <div class="services-container">
+            <div class="service-card">
+                <div class="icon-wrapper" href="./Categories.html">
+                    <img src="./imag/a1.jpg" alt="UI/UX Design">
+                </div>
                 <h3>UI/UX Design</h3>
-                <ul>
-                    <li>تصميم تطبيق</li>
-                    <li>تصميم موقع</li>
-                    <li>تصميم صفحة هبوط</li>
-                    <li>تصميم لوحة تحكم</li>
-                </ul>
-                <h3 class="sub-title">تصميم الهوية البصرية</h3>
-                <ul>
-                    <li>تصميم لوجو</li>
-                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-wrapper" href="./Categories.html">
+                    <img src="./imag/a2.jpg" alt="Social Media Design">
+                </div>
+                <h3>تصميم سوشيال ميديا</h3>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-wrapper" href="./Categories.html">
+                    <img src="./imag/a3.jpg" alt="Visual Identity">
+                </div>
+                <h3>تصميم الهوية البصرية</h3>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-wrapper" href="./Categories.html">
+                    <img src="./imag/a4.jpg" alt="Printing Design">
+                </div>
+                <h3>تصميم للطباعة والنشر</h3>
             </div>
         </div>
-    </div>
-</section>
-<footer class="main-footer">
-    <div class="footer-container">
-        <p>© 2026 GhayaTech. All rights reserved.</p>
-    </div>
-</footer>
-    <script src="script.js"></script>
+    </section>
+    <section id="services-directory" class="services-directory">
+        <div class="directory-container">
+            <h2 class="directory-title">تصفح خدمات تصميم</h2>
+
+            <div class="directory-grid">
+                <div class="directory-column">
+                    <h3>تصميم سوشيال ميديا</h3>
+                    <ul class="double-col">
+                        <li>مطاعم</li>
+                        <li>ملابس</li>
+                        <li>عطور</li>
+                        <li>تجميل</li>
+                        <li>عملات رقمية</li>
+                        <li>مجوهرات</li>
+                        <li>إلكترونيات</li>
+                        <li>عقارات</li>
+                        <li>سيارات</li>
+                        <li>ساعات</li>
+                        <li>أثاث</li>
+                        <li>عروض</li>
+                        <li class="full-row">اليوم الوطني والمناسبات والأعياد</li>
+                    </ul>
+                </div>
+
+                <div class="directory-column">
+                    <h3>التصميم للطباعة والنشر</h3>
+                    <ul>
+                        <li>لوحات إعلانية</li>
+                        <li>بزنس كارد</li>
+                        <li>تغليفات</li>
+                        <li>بروشور</li>
+                        <li>تصميم منيو</li>
+                        <li>رول أب</li>
+                    </ul>
+                </div>
+
+                <div class="directory-column">
+                    <h3>UI/UX Design</h3>
+                    <ul>
+                        <li>تصميم تطبيق</li>
+                        <li>تصميم موقع</li>
+                        <li>تصميم صفحة هبوط</li>
+                        <li>تصميم لوحة تحكم</li>
+                    </ul>
+                    <h3 class="sub-title">تصميم الهوية البصرية</h3>
+                    <ul>
+                        <li>تصميم لوجو</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p>© 2026 GhayaTech. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="./app.js"></script>
 </body>
 
 </html>

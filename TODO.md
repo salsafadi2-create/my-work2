@@ -1,0 +1,4 @@
+- [x] Position search icon inside input on right side in index.html
+- [x] Add and position search icon in Categories.html
+- [x] Update CSS for consistent search icon styling
+- [x] Test the arrangement in browser
