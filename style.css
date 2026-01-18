@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 :root {
@@ -15,68 +16,72 @@
     --gray: #666;
 }
 
-body {
+body, html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     /* background-color: var(--bg); */
     margin: 0;
+    overflow-x: hidden; /* يمنع السكرول العرضي بشكل نهائي */
+    width: 100%;
+    padding: 0;
 }
 
 /* Header */
-/* التنسيق العام للهيدر */
+/* === الهيدر — متجاوب على الجوال === */
 .main-header {
-    background-color: #1a4d43;
-    padding: 15px 5%;
+    background-color: var(--primary);
+    padding: 12px 5%;
     position: sticky;
     top: 0;
     z-index: 2000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .container-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    direction: rtl;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 /* الشعار */
-.logo img { 
-    height: 50px;
-    /* هذا الفلتر سيجعل اللون الأسود شفافاً تماماً */
-    mix-blend-mode: screen; 
+.logo img {
+    height: 40px;
+    mix-blend-mode: screen;
     filter: brightness(1.3);
     display: block;
- }
+}
 
-/* البحث */
+/* شريط البحث — متجاوب */
 .search-wrapper {
     position: relative;
-    width: 600px;
-    display: flex;
-    left: 50px;
+    width: 100vh;
+    max-width: 600px;
 }
 
 .search-wrapper input {
-    background-color: #eef1f0;
-    /* color: #e8f3f0; */
-    width: 500px;
-    padding: 15px 20px;
+    width: 100%;
+    padding: 10px 20px 10px 45px;
     border-radius: 25px;
     border: none;
     outline: none;
+    background-color: #14643c1d;
+    font-size: 14px;
 }
 
 .search-btn {
     position: absolute;
-    left: 10px;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: #1a4d43;
+    color: var(--primary);
     cursor: pointer;
+    font-size: 16px;
 }
 
-/* الهمبرجر */
+/* القائمة الجانبية (الهامبرجر) */
 .hamburger-menu {
     cursor: pointer;
     display: flex;
@@ -85,45 +90,31 @@ body {
 }
 
 .hamburger-menu span {
-    width: 30px;
+    width: 28px;
     height: 3px;
     background-color: white;
     border-radius: 2px;
 }
 
-/* القائمة الجانبية */
+/* القائمة الجانبية المنبثقة */
 .side-nav {
-    position: fixed;
+     position: fixed;
     top: 0;
-    right: -300px; /* مخفية لليمين */
-    width: 300px;
     height: 100vh;
-    background: #1a4d4376;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    background: rgba(26, 77, 67, 0.401);
     transition: 0.4s;
-    z-index: 3000;
-    padding: 60px 20px;
+    padding: 60px 20px 20px;
+    right: -100%; /* تبدأ مخفية خارج الشاشة من جهة اليمين */
+    width: 280px;
+    height: 100%;
+    z-index: 1000;
+    direction: rtl; /* ضمان محاذاة النص لليمين */
 }
 
-
-
-.side-nav.open { right: 0; }
-
-.nav-links { list-style: none; padding: 0; text-align: right; }
-.nav-links li { padding: 15px 0; border-bottom: 1px solid #eee; }
-.nav-links li a { text-decoration: none; color: #f3f1f1; font-weight: bold; }
-
-/* التفرعات (Submenu) */
-.submenu {
-    display: none;
-    list-style: none;
-    padding-right: 20px;
-    /* background: #f9f9f9; */
+.side-nav.open {
+    right: 0; /* تظهر عند إضافة الكلاس */
 }
 
-.has-submenu.active .submenu { display: block; }
-
-/* غطاء الخلفية */
 .overlay {
     display: none;
     position: fixed;
@@ -134,7 +125,58 @@ body {
     background: rgba(0,0,0,0.5);
     z-index: 2500;
 }
-.overlay.show { display: block; }
+
+.overlay.show {
+    display: block;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    text-align: right;
+}
+
+.nav-links li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 2500;
+}
+
+.overlay.show {
+    display: block;
+} */
+
+/* === أيقونة بحث الجوال === */
+.mobile-search-icon {
+    display: none;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    margin-right: 15px;
+}
+
+
 /* نهاية الهيدر */
 
 /* /* غطاء الخلفية المعتم */
@@ -220,23 +262,23 @@ body {
 
 /* زر خدمات مميزة مع الهوفر */
 .custom-select-wrapper {
-    background: white !important;
-    border: 1px solid #1a4d43 !important;
-    border-radius: 10px !important;
-    padding: 10px 15px !important;
-    display: flex !important;
-    align-items: center !important;
+    background: white ;
+    border: 1px solid #1a4d43 ;
+    border-radius: 10px ;
+    padding: 10px 15px ;
+    display: flex ;
+    align-items: center ;
     gap: 10px;
     cursor: pointer;
-    color: #1a4d43 !important;
+    color: #1a4d43 ;
     font-weight: bold;
     transition: 0.3s ease-in-out;
     white-space: nowrap;
 }
 
 .custom-select-wrapper:hover {
-    background-color: #1a4d43 !important;
-    color: white !important;
+    background-color: #1a4d43 ;
+    color: white ;
 }
 
 
@@ -298,13 +340,7 @@ body {
     /* مسافة من جهة اليسار */
 }
 
-/* لضمان عدم تجاوز العرض في الشاشات الكبيرة جداً وثباته كما في فيجما */
-@media (min-width: 1728px) {
-    .hero-banner {
-        max-width: 1728px;
-        margin: 0 auto;
-    }
-}
+
 
 .hero-image-container {
     width: 100%;
@@ -324,8 +360,6 @@ body {
 
 
 /* سيكشن الخدمات  */
-
-
 .services-section {
     padding: 80px 0;
     text-align: center;
@@ -351,10 +385,9 @@ body {
 }
 
 .service-card {
-    background: #ffffff;
+    background: var(--white);
     border: 1px solid #f0f0f0;
     border-radius: 24px;
-    /* مطابقة لحواف فيجما */
     padding: 40px 20px;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     cursor: pointer;
@@ -363,8 +396,8 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-    position: relative;
-    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
 }
 
 /* --- الهوفر الخاص بالبطاقة (الظل والارتفاع) --- */
@@ -462,7 +495,7 @@ body {
 
 
 /* 2. هوفر زر خدمات مميزة */
-.custom-select-wrapper {
+/* .custom-select-wrapper {
     background: white !important;
     border: 1.5px solid #1a4d43 !important;
     border-radius: 10px !important;
@@ -478,7 +511,7 @@ body {
     background-color: #1a4d43 !important;
     color: white !important;
     box-shadow: 0 5px 15px rgba(26, 77, 67, 0.2);
-}
+} */
 
 /* 3. تنسيق المودل المنبثق (الشفافية والتوسط) */
 .modal-overlay {
@@ -556,28 +589,6 @@ body {
     color: #ff4d4d;
 }
 
-
-
-
-
-
-/* التجاوب مع الجوال */
-@media (max-width: 992px) {
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-        /* بطاقتين في الصف للأجهزة المتوسطة */
-    }
-}
-
-@media (max-width: 600px) {
-    .services-grid {
-        grid-template-columns: 1fr;
-        /* بطاقة واحدة في الصف للجوال */
-    }
-}
-
-
-
 .directory-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -638,19 +649,7 @@ body {
     margin-top: 35px;
 }
 
-/* التجاوب مع الشاشات الصغيرة */
-@media (max-width: 992px) {
-    .directory-grid {
-        grid-template-columns: 1fr;
-        /* عمود واحد للجوال */
-        gap: 30px;
-    }
 
-    .double-col {
-        grid-template-columns: repeat(2, 1fr);
-        /* يبقى عمودين في الجوال لتوفير المساحة */
-    }
-}
 
 /* الإعدادات العامة للسيكشن */
 .category-header {
@@ -846,12 +845,12 @@ body {
     /* يأخذ كل المساحة المتبقية جهة الشمال */
 }
 
-.gallery-grid {
+/* .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* 3 أعمدة */
+    3 أعمدة
     gap: 20px;
-}
+} */
 
 .work-card {
     background-color: #f5f5f5;
@@ -936,8 +935,8 @@ body {
 
 /* 1. إعدادات الحاوية الكبرى لضمان عدم وجود فراغات عشوائية */
 .portfolio-layout {
-    width: 90%;
-    padding: 60px 0;
+    width: 100%;
+    padding: 30px 0;
     background-color: #ffffff;
     direction: rtl;
     /* الترتيب العربي */
@@ -949,60 +948,147 @@ body {
     align-items: flex-start;
     max-width: 1300px; /* يجب أن يكون نفس عرض السكشن العلوي */
     margin: 0 auto;    /* يتوسط الصفحة ليوازي الهيدر */
-    padding: 0 20px;   /* هوامش جانبية ثابتة */
+    padding: 0 0px;   /* هوامش جانبية ثابتة */
+}
+/* الحاوية التي تجمع السايد بار والمعرض */
+.portfolio-layout .container-fluid {
+    padding-right: 90px !important; /* إلغاء الفراغ من جهة اليمين حيث يوجد السايد بار */
+    padding-left: 0;
+    margin-right: 0px;
+    margin-left: 0;
+    display: flex;
+    gap: 30px; /* هذه هي المسافة التي ستفصل السايد بار عن معرض الصور */
+    direction: rtl; /* لضمان أن المسافة تظهر جهة اليسار للسايد بار العربي */
+}
+
+/* إذا كنت تستخدم Flexbox تأكد من عدم وجود gap */
+.portfolio-layout {
+    display: flex;
+    /* gap: 0; إلغاء الفراغ بين السايد بار وشبكة الصور */
+    margin:20px ;
 }
 
 /* 2. تنسيق القائمة الجانبية (اليمين) */
+
+
+/* الحاوية الرئيسية للسايد بار */
 .sidebar-categories {
-    width: 250px;       /* عرض ثابت وأنيق */
-    position: sticky;   /* لجعلها تلاحق المستخدم عند النزول */
-    top: 100px;         /* مسافة من الأعلى لعدم الالتصاق بالهيدر */
-    background: #fff;
-    padding: 20px;
-    border-right: 1px solid #eee; /* خط بسيط للفصل بدلاً من الحواف القوية */
+    width: 300px;
+    background-color: #ffffff;
+    padding: 20px; /* المسافة الداخلية للمحتوى فقط */
+    position: sticky;
+    top: 0; /* جعل السايد بار يبدأ من أعلى نقطة ممكنة */
+    height: 100vh; /* ليأخذ كامل ارتفاع الشاشة */
+    overflow-y: auto;
+    border-right: 1px solid #f0f0f0;
+    direction: rtl;
+    z-index: 10; /* لضمان عدم تداخله مع عناصر أخرى */
+    margin-left: 200px; /* يضيف مسافة بين نهاية السايد بار وبداية الصور */
+    border-left: 1px solid #f0f0f0; /* اختياري: خط فاصل رفيع */
 }
 
+/* العنوان الرئيسي (الأقسام) */
 .sidebar-title {
-    font-size: 20px;
     color: #1a4d43;
-    margin-bottom: 25px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #1a4d43; /* خط تحت العنوان لزيادة التنسيق */
-    text-align: right;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    padding-right: 10px;
+    border-right: 5px solid #1a4d43; /* الخط العمودي المميز */
 }
 
+/* تنسيق المجموعات والقوائم */
+.category-group {
+    margin-bottom: 25px;
+}
+
+/* العناوين الكبيرة (التصاميم، الهوية، إلخ) */
+.catiegory-head, .category-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 8px;
+}
+
+.catiegory-head span {
+    font-weight: 700;
+    font-size: 18px;
+    color: #1a4d43;
+}
+
+.category-main span {
+    font-weight: 600;
+    font-size: 16px;
+    color: #444;
+}
+
+/* الحالة النشطة للقسم الرئيسي */
+.category-main.active {
+    background-color: rgba(26, 77, 67, 0.05);
+}
+
+.category-main.active span {
+    color: #1a4d43;
+}
+
+/* القائمة الفرعية (الأقسام بالداخل) */
 .sub-category-list {
     list-style: none;
-    padding-right: 15px;
-    border-right: 1px solid #eee;
+    padding: 10px 20px 0 0; /* إزاحة لليمين قليلاً */
+    margin: 0;
 }
 
 .sub-category-list li {
-    padding: 10px 0;
-    color: #888;
-    font-size: 16px;
+    padding: 8px 12px;
+    font-size: 15px;
+    color: #666;
     cursor: pointer;
-    transition: 0.3s ease;
+    border-right: 2px solid transparent;
+    transition: 0.3s;
 }
 
-.sub-category-list li:hover,
+.sub-category-list li:hover {
+    color: #1a4d43;
+    padding-right: 18px; /* تأثير حركة بسيط عند التمرير */
+}
+
+/* القسم المختار حالياً */
 .sub-category-list li.active {
     color: #1a4d43;
     font-weight: 700;
+    border-right-color: #1a4d43;
+    background: linear-gradient(to left, rgba(26, 77, 67, 0.08), transparent);
+}
+
+/* الأيقونات */
+.fas {
+    font-size: 12px;
+    color: #999;
+}
+
+.category-main.active .fas {
+    transform: rotate(180deg);
+    color: #1a4d43;
 }
 
 /* 3. تنسيق معرض الصور (اليسار) */
 .gallery-main {
-    flex: 1;
-    /* يأخذ كل المساحة المتبقية */
+   flex: 1; /* يأخذ كل المساحة المتبقية */
+    padding-right: 0; /* لضمان البدء من نفس محاذاة السيرش */
+    display: flex;
+    flex-direction: column;
+    max-width: 600%;
 }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* 3 أعمدة متساوية */
-    gap: 20px;
-    /* الفراغ بين الصور كما في فيجما */
+    grid-template-columns: repeat(3, 1fr); /* 3 صور في الصف */
+    gap: 20px; /* المسافة بين الصور */
+    width: 100%;
+    margin-top: 20px; /* مسافة بين السيرش وأول صف صور */
 }
 
 /* حاوية الزر لضمان التوسط تحت المعرض */
@@ -1039,15 +1125,10 @@ body {
     font-size: 14px;
 }
 .work-card {
-    aspect-ratio: 1 / 1;
-    /* يضمن أن تظل الصور مربعة دائماً */
-    border-radius: 24px;
-    /* حواف منحنية كبيرة كما في التصميم */
+   width: 100%;
+    border-radius: 20px;
     overflow: hidden;
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    cursor: pointer;
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #fff;
 }
 
 .work-card img {
@@ -1079,15 +1160,15 @@ body {
     padding: 20px;
 }
 
-.modal-container {
+/* .modal-container {
     background: #fff;
     width: 90%;
-    max-width: 1100px;
+    max-width: 450px;
     border-radius: 30px;
     display: flex;
     overflow: hidden;
     animation: zoomIn 0.3s ease-out;
-}
+} */
 
 @keyframes zoomIn {
     from {
@@ -1190,51 +1271,94 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* الخلفية المعتمة */
+/* === نافذة الصورة المنبثقة — مثل Figma === */
 .modal-overlay {
     display: none;
-    /* مخفي بشكل افتراضي */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    /* تغميق الخلفية */
-    backdrop-filter: blur(8px);
-    /* تأثير الضبابية خلف النافذة */
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
     z-index: 9999;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
-/* حاوية النافذة البيضاء */
 .modal-container {
-    background: #fff;
+    background: white;
     width: 90%;
-    max-width: 1000px;
-    border-radius: 24px;
-    /* حواف منحنية كبيرة كما في فيجما */
-    position: relative;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     overflow: hidden;
-    direction: rtl;
+    position: relative;
+    animation: zoomIn 0.3s ease-out;
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 28px;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s;
+}
+
+.close-modal:hover {
+    transform: rotate(90deg) scale(1.2);
+    color: #ff4d4d;
 }
 
 .modal-content-wrapper {
+    padding: 30px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.modal-image-box {
-    flex: 1;
-    min-width: 300px;
-    background: #f0f0f0;
+.modal-header {
+    text-align: right;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-.modal-image-box img {
+.breadcrumb-text {
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.modal-image-area {
+    width: 100%;
+    background: #f5f5f5;
+    border-radius: 15px;
+    overflow: hidden;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-image-area img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* ⭐️ هذا يملأ المساحة تمامًا — قد يقص أطراف الصورة */
+    transition: transform 0.5s ease;
+}
+
+.modal-image-area img:hover {
+    transform: scale(1.05);
 }
 
 .modal-info-box {
@@ -1256,98 +1380,333 @@ body {
     color: #1a4d43;
     z-index: 100;
 }
-
-
-/* --- التنسيقات العامة (لجميع الشاشات) --- */
-.portfolio-layout .container-fluid {
-    display: grid;
-    grid-template-columns: 280px 1fr; /* ديسكتوب: عمود للأقسام وعمود للصور */
-    gap: 30px;
-    transition: all 0.3s ease;
+/* 1. إخفاء السكشن تماماً في نسخة الكمبيوتر */
+.filter-section-mobile {
+    display: none;
 }
 
-/* --- للشاشات المتوسطة (Tablets - أقل من 1024px) --- */
-@media (max-width: 1024px) {
-    .header-main-content {
-        flex-direction: column; /* جعل العنوان والبحث فوق بعضهما */
-        gap: 20px;
-        text-align: center;
+/* 2. إظهاره فقط عند حجم الجوال (أصغر من 768px) */
+@media (max-width: 768px) {
+    .filter-section-mobile {
+        display: block; /* يظهر الآن فقط في الجوال */
+        padding: 15px;
+        background: #fff;
     }
-    
-    .search-box-and-btn {
+
+    .filter-buttons-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .custom-dropdown {
+        flex: 1; /* الزرين بنفس المقاس */
+        position: relative;
+    }
+
+    .drop-btn {
+        display: flex;
+        /* عكس الاتجاه: النص يمين والسهم يسار */
+        flex-direction: row-reverse; 
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        padding: 12px 15px;
+    }
+
+    /* تنسيق القائمة المنسدلة عند الضغط */
+    .drop-menu {
+        display: none;
+        position: absolute;
+        top: 105%;
+        right: 0;
         width: 100%;
+        background: white;
+        z-index: 1000;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        list-style: none;
+        padding: 5px 0;
+    }
+
+    .drop-menu li {
+        padding: 10px 15px;
+        border-bottom: 1px solid #f9f9f9;
+        font-size: 14px;
+        text-align: right;
+    }
+
+    /* السيرش بعرض كامل */
+   .full-width-search {
+        position: relative;
+        width: 100%;
+    }
+
+    .full-width-search input {
+        width: 100%;
+        padding: 12px 40px 12px 15px;
+        border-radius: 25px;
+        border: 1px solid #eee;
+        background: #f1f3f2;
+        outline: none;
+    }
+
+    .full-width-search i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+    }
+     /* 1. هيدر متجاوب (الشعار يمين والهمبرجر يسار) */
+    .container-header {
+        padding: 10px 15px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* إظهار أيقونة البحث فقط في الهيدر */
+    .search-wrapper {
+        display: none; /* إخفاء التكست بوكس الأساسي */
+    }
+    .mobile-search-icon {
+        display: block; /* أضف أيقونة i في HTML لهذا الكلاس */
+        color: white;
+        font-size: 20px;
+    }
+
+    /* 2. خدمات التصميم الإبداعي (تحت بعض) */
+    .creative-services-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    /* 3. تصفح الخدمات (جزئين فوق وجزئين تحت) */
+    .services-browse-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* تقسيم الشاشة لنصفين */
+        gap: 15px;
+    }
+     /* 1. شعار الكاتيجوري في المنتصف */
+    .category-page .container-header {
         justify-content: center;
     }
-    
-    .portfolio-layout .container-fluid {
-        grid-template-columns: 220px 1fr; /* تضييق القائمة الجانبية قليلاً */
-    }
-}
+    .category-page .logo { margin: 0 auto; }
+    .category-page .hamburger-menu { position: absolute; left: 15px; }
 
-/* --- للشاشات الصغيرة (Mobile - أقل من 768px) --- */
-@media (max-width: 768px) {
-    .portfolio-layout .container-fluid {
-        grid-template-columns: 1fr; /* عمود واحد فقط: الأقسام ثم الصور */
+    /* 2. البتونز (اختر القسم وخصص القسم) جنب بعض */
+    .filter-buttons-row {
+        display: flex;
+        gap: 10px;
+        padding: 15px;
+        width: 100%;
     }
 
+    .custom-select-btn {
+        flex: 1; /* مقاسات متساوية */
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        padding: 12px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        position: relative; /* لترتيب الـ UL بداخله */
+    }
+
+    /* 3. السيرش تحتهم بعرض كامل الـ row */
+    .category-search-wrapper {
+        width: calc(100% - 30px);
+        margin: 0 15px 20px;
+    }
+    .category-search-wrapper input {
+        width: 100%;
+        border-radius: 25px;
+        padding: 12px 20px;
+        background: #eef1f0;
+    }
+
+    /* 4. المعرض (صورتين صورتين) */
+    /* .gallery-grid {1
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px;
+        padding: 0 15px;
+    } */
+
+    /* 5. بتون مشاهدة المزيد (أخضر وبالنص مع هوفر) */
+    .load-more-container {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+    }
+    .btn-load-more {
+        background: #1a4d43;
+        color: white;
+        padding: 12px 40px;
+        border-radius: 30px;
+        transition: 0.3s ease;
+    }
+    .btn-load-more:hover {
+        background: #143b33;
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(26, 77, 67, 0.3);
+    }
+      /* إخفاء سكشن العنوان والشرح القديم بالكامل */
+    .category-header-section {
+        display: none !important;
+    }
     .sidebar-categories {
-        display: none; /* يفضل إخفاؤها في الجوال وتحويلها لزر منسدل */
+        display: none !important; /* إخفاء السايد بار العمودي في الجوال */
+    }
+     /* ضبط الحاوية الرئيسية للمعرض */
+    .gallery-main {
+        padding: 10px;
+        width: 100%;
     }
 
+    /* تحويل الشبكة إلى عمودين متساويين */
     .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* تصغير حجم الصور لتناسب الجوال */
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* صورتين في الصف */
+        gap: 12px; /* المسافة بين الصور */
+        padding: 0;
+    }
+
+    /* تنسيق كارت العمل (الصورة) */
+    .work-card {
+        width: 100%;
+        border-radius: 15px; /* الزوايا الدائرية كما في Figma */
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .work-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1; /* لجعل الصور مربعة ومنتظمة */
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+    .load-more-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 30px 0 50px; /* مسافة من الأسفل */
+    }
+
+    .btn-load-more {
+        background-color: #1a4d43; /* لون شعار غايتك */
+        color: #ffffff;
+        border: none;
+        padding: 12px 40px;
+        border-radius: 30px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(26, 77, 67, 0.2);
+    }
+
+    /* تأثير الهوفر الرايق */
+    .btn-load-more:active, .btn-load-more:hover {
+        background-color: #143b33;
+        transform: scale(0.98); /* تأثير ضغطة بسيطة */
+        box-shadow: 0 2px 8px rgba(26, 77, 67, 0.3);
+    }
+     .main-footer {
+        background-color: #1a4d43; /* لون غايتك الأساسي */
+        padding: 30px 20px;
+        text-align: center;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         gap: 15px;
     }
 
-    .search-wrapper {
-        width: 100% !important; /* البحث يأخذ عرض الشاشة بالكامل */
+    .footer-container p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 13px;
+        margin: 0;
+        letter-spacing: 0.5px;
     }
 
-    .modal-box {
-        width: 95%; /* المودل يملأ عرض الجوال */
-        max-width: none;
+    /* إضافة لمسة احترافية: روابط سريعة في الفوتر للجوال */
+    .footer-social-links {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 10px;
+    }
+
+    .footer-social-links a {
+        color: #fff;
+        font-size: 18px;
+        transition: opacity 0.3s;
+    }
+
+    .footer-social-links a:hover {
+        opacity: 0.7;
+    }
+    .custom-dropdown {
+        position: relative; /* ضروري لتموضع القائمة بالنسبة للزر */
+    }
+
+    .drop-menu {
+        display: none; /* مخفية افتراضياً */
+        position: absolute;
+        top: 110%; /* تظهر أسفل الزر مباشرة */
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        z-index: 9999; /* لضمان ظهورها فوق شبكة الصور */
+        list-style: none;
+        padding: 8px 0;
+        margin: 0;
+    }
+
+    .drop-menu li {
+        padding: 12px 20px;
+        font-size: 14px;
+        color: #333;
+        text-align: right;
+        border-bottom: 1px solid #f5f5f5;
+        cursor: pointer;
+    }
+
+    .drop-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .drop-menu li:hover {
+        background-color: #f1f3f2;
+        color: #1a4d43;
     }
 }
 
 
-/* --- للشاشات المتوسطة (مثل الآيباد والتابلت) --- */
-@media (max-width: 1024px) {
-    .header-main-content {
-        flex-direction: column !important; /* جعل العنوان والبحث فوق بعضهما */
-        gap: 20px !important;
-        text-align: center;
-    }
 
-    .search-box-and-btn {
-        width: 100% !important;
-        justify-content: center !important;
-    }
 
-    .portfolio-layout .container-fluid {
-        grid-template-columns: 200px 1fr !important; /* تصغير عرض القائمة الجانبية */
-    }
-}
 
-/* --- للشاشات الصغيرة (الجوالات) --- */
-@media (max-width: 768px) {
-    .portfolio-layout .container-fluid {
-        grid-template-columns: 1fr !important; /* تحويل الصفحة لعمود واحد (الأقسام تحتها الصور) */
-    }
 
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important; /* عرض صورتين في السطر الواحد بجانب بعضهما */
-        gap: 10px !important;
-    }
 
-    .search-wrapper {
-        width: 100% !important; /* البحث يملأ عرض الشاشة */
-    }
 
-    .sidebar-categories {
-        text-align: center;
-        border-bottom: 2px solid #eee;
-        padding-bottom: 20px;
-    }
-}
 
 

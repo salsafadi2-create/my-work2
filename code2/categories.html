@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --primary: #1a4d43;
+        /* لون غايتك الأساسي */
+        --accent: #2a6358;
+        --bg: #f4f7f6;
+        --white: #ffffff;
+        --gray: #666;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* background-color: var(--bg); */
+        margin: 0;
+    }
+
+    /* Header */
+
+    /* === الهيدر — متجاوب على الجوال === */
+    .main-header {
+        background-color: var(--primary);
+        padding: 12px 5%;
+        position: sticky;
+        top: 0;
+        z-index: 2000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    /* الشعار */
+    .logo img {
+        height: 40px;
+        mix-blend-mode: screen;
+        filter: brightness(1.3);
+        display: block;
+    }
+
+    /* شريط البحث — متجاوب */
+    .search-wrapper {
+        position: relative;
+        width: 100vh;
+        max-width: 600px;
+    }
+
+    .search-wrapper input {
+        width: 100%;
+        padding: 10px 20px 10px 45px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        background-color: #eef1f0;
+        font-size: 14px;
+    }
+
+    .search-btn {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--primary);
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    /* القائمة الجانبية (الهامبرجر) */
+    .hamburger-menu {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .hamburger-menu span {
+        width: 28px;
+        height: 3px;
+        background-color: white;
+        border-radius: 2px;
+    }
+
+    /* القائمة الجانبية المنبثقة */
+    .side-nav {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        /* مخفية افتراضيًا */
+        width: 300px;
+        height: 100vh;
+        background: rgba(26, 77, 67, 0.95);
+        transition: 0.4s;
+        z-index: 3000;
+        padding: 60px 20px 20px;
+    }
+
+    .side-nav.open {
+        right: 0;
+        /* تظهر عند إضافة الكلاس */
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2500;
+    }
+
+    .overlay.show {
+        display: block;
+    }
+
+    .nav-links {
+        list-style: none;
+        padding: 0;
+        text-align: right;
+    }
+
+    .nav-links li {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links li a {
+        text-decoration: none;
+        color: var(--white);
+        font-weight: 500;
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2500;
+    }
+
+    .overlay.show {
+        display: block;
+    }
+
+    /* === أيقونة بحث الجوال === */
+    .mobile-search-icon {
+        display: none;
+        cursor: pointer;
+        color: white;
+        font-size: 20px;
+        margin-right: 15px;
+    }
+
+    @media (max-width: 768px) {
+        .center-section {
+            display: none !important;
+        }
+
+        .mobile-search-icon {
+            display: block;
+        }
+
+        /* جعل الهيدر يحتوي على الهامبرجر + الشعار + أيقونة بحث */
+        .container-header {
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+    }
+
+    /* نهاية الهيدر */
+
+    /* post */
+    .category-header-section {
+        padding: 30px 5% !important;
+        /* background-color: #f9f9f9 !important; */
+        border: none !important;
+        direction: rtl;
+    }
+
+    .header-main-content {
+
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .header-main-content .title-area {
+        color: #2a6358;
+        margin: 0;
+    }
+
+    /* شريط البحث — متجاوب */
+    .search-wrapper {
+        position: relative;
+        width: 100vh;
+        max-width: 600px;
+    }
+
+    .search-wrapper input {
+        width: 100%;
+        padding: 10px 20px 10px 45px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        background-color: #eef1f0;
+        font-size: 14px;
+    }
+
+    .search-btn {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--primary);
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    /* 2. هوفر زر خدمات مميزة */
+    .custom-select-wrapper {
+        background: white !important;
+        border: 1.5px solid #1a4d43 !important;
+        border-radius: 10px !important;
+        padding: 10px 18px !important;
+        cursor: pointer;
+        color: #1a4d43 !important;
+        font-weight: bold;
+        transition: all 0.3s ease !important;
+        white-space: nowrap;
+    }
+
+    .custom-select-wrapper:hover {
+        background-color: #1a4d43 !important;
+        color: white !important;
+        box-shadow: 0 5px 15px rgba(26, 77, 67, 0.2);
+    }
+
+    /* /* غطاء الخلفية المعتم */
+    .filter-pop-overlay {
+        display: none;
+        /* مخفي افتراضياً */
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        direction: rtl;
+    }
+
+    /* بطاقة الفلترة في المنتصف */
+    .filter-pop-card {
+        background: white;
+        width: 90%;
+        max-width: 380px;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        animation: slideInPop 0.3s ease-out;
+    }
+
+    @keyframes slideInPop {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .filter-pop-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    .filter-pop-header h3 {
+        color: #1a4d43;
+        margin: 0;
+    }
+
+    .close-pop-btn {
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        color: #888;
+    }
+
+    .filter-group {
+        margin-bottom: 20px;
+        text-align: right;
+    }
+
+    .filter-group label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .filter-group select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .apply-btn {
+        width: 100%;
+        background: #1a4d43;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .apply-btn:hover {
+        background: #143b33;
+    }
+
+    .portfolio-layout {
+        width: 90%;
+        padding: 60px 0;
+        background-color: #ffffff;
+        direction: rtl;
+        /* الترتيب العربي */
+    }
+
+    .container-fluid {
+        display: flex;
+        justify-content: space-between;
+        /* يوزع العناصر على الأطراف */
+        align-items: flex-start;
+        max-width: 1300px;
+        /* يجب أن يكون نفس عرض السكشن العلوي */
+        margin: 0 auto;
+        /* يتوسط الصفحة ليوازي الهيدر */
+        padding: 0 20px;
+        /* هوامش جانبية ثابتة */
+    }
+
+    /* .sidebar-categories {
+    width: 250px;       عرض ثابت وأنيق
+    position: sticky;   لجعلها تلاحق المستخدم عند النزول
+    top: 100px;         مسافة من الأعلى لعدم الالتصاق بالهيدر
+    background: #fff;
+    padding: 20px;
+    border-right: 1px solid #eee; خط بسيط للفصل بدلاً من الحواف القوية
+}
+
+.sidebar-title {
+    font-size: 20px;
+    color: #1a4d43;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #1a4d43; خط تحت العنوان لزيادة التنسيق
+    text-align: right;
+}
+.sub-category-list {
+    list-style: none;
+    padding-right: 15px;
+    border-right: 1px solid #eee;
+}
+
+.sub-category-list li {
+    padding: 10px 0;
+    color: #888;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.sub-category-list li:hover,
+.sub-category-list li.active {
+    color: #1a4d43;
+    font-weight: 700;
+} */
+
+    /* 3. تنسيق معرض الصور (اليسار) */
+    .gallery-main {
+        flex: 1;
+        /* يأخذ كل المساحة المتبقية */
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 أعمدة متساوية */
+        gap: 20px;
+        /* الفراغ بين الصور كما في فيجما */
+    }
+
+    .work-card {
+        background-color: #f5f5f5;
+        border-radius: 15px;
+        /* حواف ناعمة من فيجما */
+        aspect-ratio: 1 / 1;
+        /* يحافظ على المربع متساوي الطول والعرض */
+        overflow: hidden;
+        /* يخفي أي جزء من الصورة يخرج عن الحواف */
+        border: 1px solid #eee;
+        transition: 0.3s ease;
+    }
+
+    .work-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* هذا السطر الأهم: يجعل الصورة تملأ المربع بدون تمطيط */
+        transition: transform 0.5s ease;
+    }
+
+    /* تأثير احترافي عند تمرير الماوس */
+    .work-card:hover img {
+        transform: scale(1.1);
+        /* زووم بسيط للصورة */
+    }
+
+    /* حاوية الزر لضمان التوسط */
+    .load-more-container {
+        text-align: center;
+        margin-top: 50px;
+        padding-bottom: 40px;
+        width: 100%;
+    }
+
+    /* التنسيق الأساسي للزر */
+    .btn-load-more {
+        background-color: #1a4d43;
+        /* لون الهوية الأساسي */
+        color: #ffffff;
+        padding: 14px 45px;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: 'Tajawal', sans-serif;
+        border: none;
+        border-radius: 8px;
+        /* حواف ناعمة كما في فيجما */
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(26, 77, 67, 0.15);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* تأثير عند تمرير الماوس (Hover) */
+    .btn-load-more:hover {
+        background-color: #143b33;
+        /* درجة أغمق قليلاً */
+        transform: translateY(-3px);
+        /* رفعة خفيفة */
+        box-shadow: 0 6px 20px rgba(26, 77, 67, 0.25);
+    }
+
+    /* تأثير عند الضغط (Active) */
+    .btn-load-more:active {
+        transform: translateY(-1px);
+    }
+
+    /* 4. تنسيق النافذة المنبثقة (Modal) لمنع التداخل */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .modal-container {
+        background: #fff;
+        width: 90%;
+        max-width: 1100px;
+        border-radius: 30px;
+        display: flex;
+        overflow: hidden;
+        animation: zoomIn 0.3s ease-out;
+    }
+
+    @keyframes zoomIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .modal-flex-content {
+        display: flex;
+        flex-direction: row-reverse;
+        /* الصورة يسار والنص يمين في التنسيق العربي */
+        width: 100%;
+    }
+
+    .modal-image-side {
+        flex: 1.5;
+        background: #f0f0f0;
+    }
+
+    .modal-image-side img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .modal-info-side {
+        flex: 1;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: right;
+    }
+
+
+    .close-modal {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        font-size: 35px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .main-footer {
+        background-color: #1a4d43;
+        /* لون هوية غايتك الأساسي */
+        padding: 20px 0;
+        width: 100%;
+        margin-top: 60px;
+        /* مسافة تفصله عن محتوى الصفحة */
+        direction: rtl;
+    }
+
+    .footer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: center;
+        /* توسيط النص */
+        align-items: center;
+    }
+
+    .main-footer p {
+        color: #ffffff;
+        /* نص أبيض ناصع */
+        font-size: 14px;
+        font-family: 'Tajawal', sans-serif;
+        margin: 0;
+        opacity: 0.9;
+        /* شفافية بسيطة ليعطي مظهراً عصرياً */
+        letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+
+        /* 1. ضبط الحاوية الرئيسية */
+        .container-header {
+            padding: 5px 2%;
+            gap: 10px;
+        }
+
+        /* 2. تصغير الشعار ليناسب المساحة */
+        .logo img {
+            height: 35px;
+        }
+
+        /* 3. شريط البحث (التغيير الأهم) */
+        .search-wrapper {
+            width: auto;
+            /* إلغاء الـ 600px */
+            flex: 1;
+            /* يمتد ليأخذ المساحة المتاحة فقط */
+            left: 0;
+            /* إلغاء الإزاحة اليسرى */
+            margin: 0 10px;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            /* يأخذ كامل عرض الـ wrapper */
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 20px;
+        }
+
+        .search-btn {
+            left: 5px;
+        }
+
+        /* 4. الهمبرجر */
+        .hamburger-menu span {
+            width: 25px;
+            /* تصغير بسيط */
+        }
+
+        /* 5. القائمة الجانبية في الجوال */
+        .side-nav {
+            width: 80%;
+            /* تأخذ معظم مساحة الشاشة في الجوال */
+            right: -100%;
+            /* مخفية تماماً */
+        }
+    }
+
+    /* للشاشات الصغيرة جداً (مثل iPhone SE) */
+    @media (max-width: 480px) {
+        .container-header {
+            flex-wrap: wrap;
+            /* السماح للعناصر بالنزول لسطر جديد إذا ضاقت المساحة */
+        }
+
+        .search-wrapper {
+            order: 3;
+            /* إنزال شريط البحث لسطر منفصل */
+            width: 100%;
+            margin-top: 10px;
+            margin-right: 0;
+        }
+
+        .logo {
+            order: 1;
+        }
+
+        .hamburger-menu {
+            order: 2;
+        }
+    }
+</style>
+
+<body>
+    <header class="main-header">
+        <div class="container-header">
+            <div class="right-section">
+                <!-- الشعار على اليمين -->
+                <div class="logo">
+                    <a href="/index.html"></a>
+                    <img src="./imag/2.jpg" alt="Ghayatech Logo">
+                </div>
+            </div>
+
+            <div class="left-section">
+                <!-- الهامبرجر على اليسار -->
+                <div class="hamburger-menu" id="hamburgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- القائمة الجانبية (خارج container-header) -->
+        <div class="side-nav" id="sideNav">
+            <div class="close-menu" id="closeBtn">&times;</div>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li class="has-submenu">
+                    <a href="#">خدماتنا <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#">تصميم جرافيك</a></li>
+                        <li><a href="#">برمجة مواقع</a></li>
+                        <li><a href="#">تسويق إلكتروني</a></li>
+                    </ul>
+                </li>
+                <li><a href="categories.html">معرض الأعمال</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+        </div>
+        <div class="overlay" id="navOverlay"></div>
+    </header>
+    <section class="category-header-section">
+        <div class="header-main-content">
+            <div class="title-area">
+                <h1>تصميم منشورات سوشيال ميديا</h1>
+                <p>حول أفكارك إلى تصاميم سوشيال ميديا مميزة</p>
+            </div>
+
+            <div class="center-section">
+                <div class="search-wrapper">
+                    <input type="text" placeholder="ابحث عن تصميم...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="custom-select-wrapper" id="filterBtn" onclick="toggleFilterPop()">
+                <span>خدمات مميزة</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+
+            <div id="filterOverlay" class="filter-pop-overlay">
+                <div class="filter-pop-card">
+                    <div class="filter-pop-header">
+                        <h3>تصفية النتائج</h3>
+                        <button class="close-pop-btn" onclick="toggleFilterPop()">&times;</button>
+                    </div>
+
+                    <div class="filter-pop-body">
+                        <div class="filter-group">
+                            <label>ترتيب حسب:</label>
+                            <select id="sortBy">
+                                <option value="latest">الأحدث</option>
+                                <option value="popular">الأكثر طلباً</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>نطاق السعر:</label>
+                            <input type="range" min="10" max="1000" id="priceRange">
+                            <div class="range-values">10$ - 1000$</div>
+                        </div>
+
+                        <button class="apply-btn" onclick="applyFilters()">تطبيق التصفية</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="portfolio-layout">
+        <div class="container-fluid">
+            <!-- <aside class="sidebar-categories">
+                <h3 class="sidebar-title">الأقسام</h3>
+                <div class="category-group">
+                    <div class="catiegory-head">
+                        <span>التصاميم</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-main active">
+                        <span>تصميم سوشيال ميديا</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <ul class="sub-category-list">
+                        <li class="active" onclick="filterWorks('restaurants')">تصميم مطاعم</li>
+                        <li onclick="filterWorks('clothes')">تصاميم ملابس</li>
+                        <li onclick="filterWorks('perfumes')">تصاميم عطور</li>
+                        <li onclick="filterWorks('beauty')">تصاميم التجميل</li>
+                        <li onclick="filterWorks('crypto')"> تصاميم العملات رقمية </li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم مجوهرات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم الكترونيات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم عقارات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم سيارات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم ساعات</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم الاثاث</li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم العروض </li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم اليوم الوطني </li>
+                        <li onclick="filterWorks('jewelry')"> تصاميم المناسبات و الأعياد </li>
+
+
+                    </ul>
+                </div>
+
+                <div class="category-group">
+                    <div class="category-main">
+                        <span>تصميم الهوية البصرية</span>
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="category-main">
+                        <span>UX / UI تصميم</span>
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="category-main">
+                        <span> تصميم الطباعة و النشر</span>
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+            </aside> -->
+
+            <main class="gallery-main">
+                <div class="gallery-grid">
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=1" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=2" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=3" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=4" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=5" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=6" class="clickable-img"
+                            alt="Work"></div>
+                </div>
+                <div class="load-more-container">
+                    <button class="btn-load-more">
+                        <span>مشاهدة المزيد</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </main>
+
+
+
+            <script>
+                // هذه الوظيفة ستعمل فور الضغط على الصورة
+                document.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('clickable-img')) {
+                        const modal = document.getElementById('imageModal');
+                        const modalImg = document.getElementById('modalFullImage');
+
+                        modal.style.display = 'flex'; // إظهار النافذة
+                        modalImg.src = e.target.src;   // نقل الصورة
+                        console.log("تم فتح الصورة بنجاح!");
+                    }
+                });
+
+                // وظيفة الإغلاق
+                function closeMyModal() {
+                    document.getElementById('imageModal').style.display = 'none';
+                }
+
+                // الإغلاق عند الضغط خارج الصندوق
+                window.onclick = function (event) {
+                    const modal = document.getElementById('imageModal');
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                }
+            </script>
+
+        </div>
+    </section>
+    <div id="imageModal" class="modal-overlay">
+        <div class="modal-container">
+            <span class="close-modal">&times;</span>
+            <div class="modal-content-wrapper">
+                <!-- العنوان -->
+                <div class="modal-header">
+                    <p class="breadcrumb-text">الرئيسية / التصميم / تصاميم سوشيال ميديا</p>
+                </div>
+
+                <!-- الصورة -->
+                <div class="modal-image-area">
+                    <img id="modalFullImage" src="" alt="Full Preview">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p>© 2026 GhayaTech. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

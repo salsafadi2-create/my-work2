@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --primary: #1a4d43;
+        /* لون غايتك الأساسي */
+        --accent: #2a6358;
+        --bg: #f4f7f6;
+        --white: #ffffff;
+        --gray: #666;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+    }
+
+    /* Header */
+
+    /* === الهيدر — متجاوب على الجوال === */
+    .main-header {
+        background-color: var(--primary);
+        padding: 12px 5%;
+        position: sticky;
+        top: 0;
+        z-index: 2000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    /* الشعار */
+    .logo img {
+        height: 40px;
+        mix-blend-mode: screen;
+        filter: brightness(1.3);
+        display: block;
+    }
+
+    /* شريط البحث — متجاوب */
+    .search-wrapper {
+        position: relative;
+        width: 100vh;
+        max-width: 600px;
+    }
+
+    .search-wrapper input {
+        width: 100%;
+        padding: 10px 20px 10px 45px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        background-color: #eef1f0;
+        font-size: 14px;
+    }
+
+    .search-btn {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--primary);
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    /* القائمة الجانبية (الهامبرجر) */
+    .hamburger-menu {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .hamburger-menu span {
+        width: 28px;
+        height: 3px;
+        background-color: white;
+        border-radius: 2px;
+    }
+
+    /* القائمة الجانبية المنبثقة */
+    .side-nav {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        /* مخفية افتراضيًا */
+        width: 300px;
+        height: 100vh;
+        background: rgba(26, 77, 67, 0.95);
+        transition: 0.4s;
+        z-index: 3000;
+        padding: 60px 20px 20px;
+    }
+
+    .side-nav.open {
+        right: 0;
+        /* تظهر عند إضافة الكلاس */
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2500;
+    }
+
+    .overlay.show {
+        display: block;
+    }
+
+    .nav-links {
+        list-style: none;
+        padding: 0;
+        text-align: right;
+    }
+
+    .nav-links li {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links li a {
+        text-decoration: none;
+        color: var(--white);
+        font-weight: 500;
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2500;
+    }
+
+    .overlay.show {
+        display: block;
+    }
+
+    /* === أيقونة بحث الجوال === */
+    .mobile-search-icon {
+        display: none;
+        cursor: pointer;
+        color: white;
+        font-size: 20px;
+        margin-right: 15px;
+    }
+
+    @media (max-width: 768px) {
+        .center-section {
+            display: none !important;
+        }
+
+        .mobile-search-icon {
+            display: block;
+        }
+
+        /* جعل الهيدر يحتوي على الهامبرجر + الشعار + أيقونة بحث */
+        .container-header {
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+    }
+
+    /* hero */
+
+
+    .hero-banner {
+        width: 100%;
+        /* height: 370px; الارتفاع المطلوب من فيجما */
+        /* استبدل hero-image.png برابط صورتك الحقيقية */
+        background-image: url('./imag/1.jpg');
+        background-size: cover;
+        /* تجعل الصورة تغطي كامل المساحة */
+        background-position: center;
+        /* توسيط الصورة لضمان ظهور الجزء الأهم */
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eaeceb;
+        /* نفس لون الهيدر لعدم وجود فاصل */
+        margin-top: 0;
+        /* يضمن التصاق الهيرو بالهيدر تماماً */
+        position: relative;
+        /* ضروري لتموضع الشعارات الجانبية */
+        overflow: hidden;
+        /* لمنع ظهور أي شريط تمرير بسبب الشعارات */
+    }
+
+    /* التنسيق المشترك للشعارين على الجانبين */
+    .hero-banner::before,
+    .hero-banner::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        /* لتوسيط الشعار عمودياً */
+        width: 180px;
+        /* حجم الشعار الجانبي تقريباً */
+        height: 150px;
+        background-image: url('./imag/3.jpg');
+        /* استخدم ملف الشعار الخاص بك */
+        background-size: contain;
+        background-repeat: no-repeat;
+        mix-blend-mode: screen;
+        /* لإخفاء خلفية الشعار السوداء كما فعلنا في الهيدر */
+        opacity: 0.15;
+        /* شفافية خفيفة جداً كما يظهر في تصميم فيجما */
+        z-index: 1;
+        /* لضمان بقائها خلف الصورة المركزية */
+    }
+
+    /* تموضع الشعار الأيمن */
+    .hero-banner::before {
+        right: 5%;
+        /* مسافة من جهة اليمين */
+    }
+
+    /* تموضع الشعار الأيسر */
+    .hero-banner::after {
+        left: 5%;
+        /* مسافة من جهة اليسار */
+    }
+
+
+
+    .hero-image-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-image-container img {
+        /* جعل الصورة تغطي المساحة بذكاء */
+        max-height: 90%;
+        object-fit: contain;
+        /* إضافة تأثير ظل خفيف للصورة كما يظهر في التصميم */
+        filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.3));
+    }
+
+
+    /* services   */
+
+
+    .services-section {
+        padding: 80px 0;
+        text-align: center;
+        background-color: #fcfcfc;
+        direction: rtl;
+        /* لضمان الترتيب العربي */
+    }
+
+    .section-title {
+        color: #1a4d43;
+        margin-bottom: 50px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .services-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .service-card {
+        background: var(--white);
+        border: 1px solid #f0f0f0;
+        border-radius: 24px;
+        padding: 40px 20px;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* --- الهوفر الخاص بالبطاقة (الظل والارتفاع) --- */
+    .service-card:hover {
+        transform: translateY(-10px);
+        border-color: #1a4d43;
+        box-shadow: 0 20px 40px rgba(26, 77, 67, 0.1);
+    }
+
+    .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s;
+    }
+
+    .service-card .icon-wrapper img {
+        width: 65px;
+        /* تكبير بسيط للأيقونة */
+        height: 65px;
+        object-fit: contain;
+        /* إلغاء الـ grayscale واستبداله بفلاتر العكس مباشرة */
+        filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.5);
+        transition: all 0.4s ease;
+    }
+
+    /* يحل مشكلة اللون الأسود ويجعل الأيقونة تلمع بلون غايتك */
+    .service-card:hover .icon-wrapper img {
+        filter: invert(1) hue-rotate(180deg) brightness(1) contrast(2);
+        transform: scale(1.1);
+        /* نبض بسيط للأيقونة */
+    }
+
+    .service-card h3 {
+        font-size: 19px;
+        color: #333;
+        margin-top: 10px;
+        transition: 0.3s;
+        font-weight: 500;
+    }
+
+    .service-card:hover h3 {
+        color: #1a4d43;
+        font-weight: bold;
+    }
+
+    /* لمسة جمالية: خط صغير يظهر تحت النص عند الهوفر */
+    .service-card h3::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #1a4d43;
+        transition: width 0.3s;
+        margin: 5px auto 0;
+    }
+
+    .service-card:hover h3::after {
+        width: 100%;
+    }
+
+    .directory-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        /* background-color: transparent; */
+    }
+
+    .directory-title {
+        text-align: center;
+        color: #1a4d43;
+        /* لون غايتك الأساسي */
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 50px;
+    }
+
+    /* توزيع الأعمدة الثلاثة الرئيسية */
+    .directory-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+
+    .directory-column h3 {
+        color: #1a4d43;
+        font-size: 19px;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .directory-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .directory-column ul li {
+        color: #555;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    /* التنسيق الخاص بتقسيم القائمة إلى جزئين */
+    .double-col {
+        display: grid !important;
+        /* تفعيل الشبكة */
+        grid-template-columns: repeat(2, 1fr);
+        /* عمودين فرعيين */
+        gap: 10px 20px;
+    }
+
+    /* جعل النص الطويل يأخذ عرض الصف كاملاً */
+    .full-row {
+        grid-column: span 2;
+    }
+
+    .sub-title {
+        margin-top: 35px;
+    }
+
+
+    /* footer */
+
+
+    .main-footer {
+        background-color: #1a4d43;
+        /* لون هوية غايتك الأساسي */
+        padding: 20px 0;
+        width: 100%;
+        margin-top: 60px;
+        /* مسافة تفصله عن محتوى الصفحة */
+        direction: rtl;
+    }
+
+    .footer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        justify-content: center;
+        /* توسيط النص */
+        align-items: center;
+    }
+
+    .main-footer p {
+        color: #ffffff;
+        /* نص أبيض ناصع */
+        font-size: 14px;
+        font-family: 'Tajawal', sans-serif;
+        margin: 0;
+        opacity: 0.9;
+        /* شفافية بسيطة ليعطي مظهراً عصرياً */
+        letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+
+        /* 1. ضبط الحاوية الرئيسية */
+        .container-header {
+            padding: 5px 2%;
+            gap: 10px;
+        }
+
+        /* 2. تصغير الشعار ليناسب المساحة */
+        .logo img {
+            height: 35px;
+        }
+
+        /* 3. شريط البحث (التغيير الأهم) */
+        .search-wrapper {
+            width: auto;
+            /* إلغاء الـ 600px */
+            flex: 1;
+            /* يمتد ليأخذ المساحة المتاحة فقط */
+            left: 0;
+            /* إلغاء الإزاحة اليسرى */
+            margin: 0 10px;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            /* يأخذ كامل عرض الـ wrapper */
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 20px;
+        }
+
+        .search-btn {
+            left: 5px;
+        }
+
+        /* 4. الهمبرجر */
+        .hamburger-menu span {
+            width: 25px;
+            /* تصغير بسيط */
+        }
+
+        /* 5. القائمة الجانبية في الجوال */
+        .side-nav {
+            width: 80%;
+            /* تأخذ معظم مساحة الشاشة في الجوال */
+            right: -100%;
+            /* مخفية تماماً */
+        }
+    }
+
+    /* للشاشات الصغيرة جداً (مثل iPhone SE) */
+    @media (max-width: 480px) {
+        .container-header {
+            flex-wrap: wrap;
+            /* السماح للعناصر بالنزول لسطر جديد إذا ضاقت المساحة */
+        }
+
+        .search-wrapper {
+            order: 3;
+            /* إنزال شريط البحث لسطر منفصل */
+            width: 100%;
+            margin-top: 10px;
+            margin-right: 0;
+        }
+
+        .logo {
+            order: 1;
+        }
+
+        .hamburger-menu {
+            order: 2;
+        }
+    }
+</style>
+
+<body>
+    <header class="main-header">
+        <div class="container-header">
+            <div class="right-section">
+                <!-- الشعار على اليمين -->
+                <div class="logo">
+                    <a href="/index.html"></a>
+                    <img src="./imag/2.jpg" alt="Ghayatech Logo">
+                </div>
+            </div>
+
+            <div class="left-section">
+                <!-- الهامبرجر على اليسار -->
+                <div class="hamburger-menu" id="hamburgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- القائمة الجانبية (خارج container-header) -->
+        <div class="side-nav" id="sideNav">
+            <div class="close-menu" id="closeBtn">&times;</div>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li class="has-submenu">
+                    <a href="#">خدماتنا <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="#">تصميم جرافيك</a></li>
+                        <li><a href="#">برمجة مواقع</a></li>
+                        <li><a href="#">تسويق إلكتروني</a></li>
+                    </ul>
+                </li>
+                <li><a href="categories.html">معرض الأعمال</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+        </div>
+        <div class="overlay" id="navOverlay"></div>
+    </header>
+    <section class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-image-container">
+                <img src="./imag/1.jpg" alt="Creative Design Services">
+            </div>
+        </div>
+    </section>
+    <section class="services-section">
+        <h2 class="section-title">خدمات التصميم الإبداعي</h2>
+
+        <div class="services-container">
+            <div class="service-card">
+                <div class="icon-wrapper" href="./Categories.html">
+                    <a href="./Categories.html"></a>
+                    <img src="./imag/a1.jpg" alt="UI/UX Design">
+                </div>
+                <h3>UI/UX Design</h3>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-wrapper" href="./Categories.html">
+                    <a href="./Categories.html"></a>
+                    <img src="./imag/a2.jpg" alt="Social Media Design">
+                </div>
+                <h3>تصميم سوشيال ميديا</h3>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-wrapper" href="./Categories.html">
+                    <a href="./Categories.html"></a>
+                    <img src="./imag/a3.jpg" alt="Visual Identity">
+                </div>
+                <h3>تصميم الهوية البصرية</h3>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-wrapper" href="./Categories.html">
+                    <a href="./Categories.html"></a>
+                    <img src="./imag/a4.jpg" alt="Printing Design">
+                </div>
+                <h3>تصميم للطباعة والنشر</h3>
+            </div>
+        </div>
+    </section>
+    <section id="services-directory" class="services-directory">
+        <div class="directory-container">
+            <h2 class="directory-title">تصفح خدمات تصميم</h2>
+
+            <div class="directory-grid">
+                <div class="directory-column">
+                    <h3>تصميم سوشيال ميديا</h3>
+                    <ul class="double-col">
+                        <li>مطاعم</li>
+                        <li>ملابس</li>
+                        <li>عطور</li>
+                        <li>تجميل</li>
+                        <li>عملات رقمية</li>
+                        <li>مجوهرات</li>
+                        <li>إلكترونيات</li>
+                        <li>عقارات</li>
+                        <li>سيارات</li>
+                        <li>ساعات</li>
+                        <li>أثاث</li>
+                        <li>عروض</li>
+                        <li class="full-row">اليوم الوطني والمناسبات والأعياد</li>
+                    </ul>
+                </div>
+
+                <div class="directory-column">
+                    <h3>التصميم للطباعة والنشر</h3>
+                    <ul>
+                        <li>لوحات إعلانية</li>
+                        <li>بزنس كارد</li>
+                        <li>تغليفات</li>
+                        <li>بروشور</li>
+                        <li>تصميم منيو</li>
+                        <li>رول أب</li>
+                    </ul>
+                </div>
+
+                <div class="directory-column">
+                    <h3>UI/UX Design</h3>
+                    <ul>
+                        <li>تصميم تطبيق</li>
+                        <li>تصميم موقع</li>
+                        <li>تصميم صفحة هبوط</li>
+                        <li>تصميم لوحة تحكم</li>
+                    </ul>
+                    <h3 class="sub-title">تصميم الهوية البصرية</h3>
+                    <ul>
+                        <li>تصميم لوجو</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p>© 2026 GhayaTech. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

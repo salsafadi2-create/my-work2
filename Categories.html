@@ -6,42 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <header class="main-header">
-        <div class="container-header">
-            <div class="right-section">
-                <div class="hamburger-menu" id="hamburgerBtn">
-                    <span></span><span></span><span></span>
-                </div>
-            </div>
-
-            <div class="left-section">
-                <div class="logo">
-                    <img src="./imag/2.jpg" alt="Ghayatech Logo">
-                </div>
+  <header class="main-header">
+    <div class="container-header">
+        <div class="right-section">
+            <!-- الشعار على اليمين -->
+            <div class="logo">
+                <img src="./imag/2.jpg" alt="Ghayatech Logo">
             </div>
         </div>
 
-        <div class="side-nav" id="sideNav">
-            <div class="close-menu" id="closeBtn">&times;</div>
-            <ul class="nav-links">
-                <li><a href="#">الرئيسية</a></li>
-                <li class="has-submenu">
-                    <a href="#">خدماتنا <i class="fas fa-chevron-down"></i></a>
-                    <ul class="submenu">
-                        <li><a href="#">تصميم جرافيك</a></li>
-                        <li><a href="#">برمجة مواقع</a></li>
-                        <li><a href="#">تسويق إلكتروني</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">معرض الأعمال</a></li>
-                <li><a href="#">اتصل بنا</a></li>
-            </ul>
+        <div class="left-section">
+            <!-- الهامبرجر على اليسار -->
+            <div class="hamburger-menu" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <div class="overlay" id="navOverlay"></div>
-    </header>
+    </div>
+
+    <!-- القائمة الجانبية (خارج container-header) -->
+    <div class="side-nav" id="sideNav">
+        <div class="close-menu" id="closeBtn">&times;</div>
+        <ul class="nav-links">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li class="has-submenu">
+                <a href="#">خدماتنا <i class="fas fa-chevron-down"></i></a>
+                <ul class="submenu">
+                    <li><a href="#">تصميم جرافيك</a></li>
+                    <li><a href="#">برمجة مواقع</a></li>
+                    <li><a href="#">تسويق إلكتروني</a></li>
+                </ul>
+            </li>
+            <li><a href="categories.html">معرض الأعمال</a></li>
+            <li><a href="#">اتصل بنا</a></li>
+        </ul>
+    </div>
+    <div class="overlay" id="navOverlay"></div>
+</header>
 
     <section class="category-header-section">
         <div class="header-main-content">
@@ -91,6 +97,34 @@
         </div>
         </div>
     </section>
+   <section class="filter-section-mobile">
+    <div class="filter-buttons-row">
+        <div class="custom-dropdown" onclick="toggleDrop('drop1')">
+            <div class="drop-btn">
+                <span>اختر القسم</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <ul id="drop1" class="drop-menu">
+                <li>سوشيال ميديا</li>
+                <li>هوية بصرية</li>
+            </ul>
+        </div>
+        <div class="custom-dropdown" onclick="toggleDrop('drop2')">
+            <div class="drop-btn">
+                <span>خصائص القسم</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <ul id="drop2" class="drop-menu">
+                <li>مطاعم</li>
+                <li>عقارات</li>
+            </ul>
+        </div>
+    </div>
+    <div class="full-width-search">
+        <input type="text" placeholder="ابحث عن تصميم...">
+        <i class="fas fa-search"></i>
+    </div>
+</section>
     <section class="portfolio-layout">
         <div class="container-fluid">
             <aside class="sidebar-categories">
@@ -154,6 +188,12 @@
                             alt="Work"></div>
                     <div class="work-card"><img src="https://picsum.photos/400/400?random=6" class="clickable-img"
                             alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=7" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=8" class="clickable-img"
+                            alt="Work"></div>
+                    <div class="work-card"><img src="https://picsum.photos/400/400?random=9" class="clickable-img"
+                            alt="Work"></div>
                 </div>
                 <div class="load-more-container">
                     <button class="btn-load-more">
@@ -163,22 +203,7 @@
                 </div>
             </main>
 
-            <div id="imageModal" class="modal-overlay">
-                <div class="modal-box">
-
-                    <div class="modal-top-bar">
-                        <div class="breadcrumb-text">
-                            التصميم / تصميم سوشيال ميديا / <span id="dynamicCategory">مطاعم</span>
-                        </div>
-                        <span class="close-icon" onclick="closeMyModal()">&times;</span>
-                    </div>
-
-                    <div class="modal-photo-area">
-                        <img id="modalFullImage" src="" alt="Work Preview">
-                    </div>
-
-                </div>
-            </div>
+          
 
             <script>
                 // هذه الوظيفة ستعمل فور الضغط على الصورة
@@ -210,25 +235,23 @@
         </div>
     </section>
 
-    <div id="imageModal" class="modal-overlay">
-        <div class="modal-container">
-            <span class="close-modal">&times;</span>
+   <!-- نافذة الصورة المنبثقة — كما في Figma -->
+<div id="imageModal" class="modal-overlay">
+    <div class="modal-container">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content-wrapper">
+            <!-- العنوان -->
+            <div class="modal-header">
+                <p class="breadcrumb-text">الرئيسية / التصميم / تصاميم سوشيال ميديا</p>
+            </div>
 
-            <div class="modal-flex-content">
-                <div class="modal-image-side">
-                    <img id="modalFullImage" src="" alt="Full Preview">
-                </div>
-
-                <div class="modal-info-side">
-                    <h2 id="modalWorkTitle">تفاصيل التصميم</h2>
-                    <p>هذا التصميم تم تنفيذه باحترافية ليتناسب مع هوية العميل، مع مراعاة أدق التفاصيل البصرية.</p>
-                    <div class="modal-actions">
-                        <button class="btn-ghaya">طلب خدمة مماثلة</button>
-                    </div>
-                </div>
+            <!-- الصورة -->
+            <div class="modal-image-area">
+                <img id="modalFullImage" src="" alt="Full Preview">
             </div>
         </div>
     </div>
+</div>
     <footer class="main-footer">
         <div class="footer-container">
             <p>© 2026 GhayaTech. All rights reserved.</p>
